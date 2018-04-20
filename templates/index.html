@@ -1,0 +1,232 @@
+{% extends 'layout.html' %}
+
+{% load static %}
+{% block title %}Blood relations{% endblock %}
+{% block content %}
+<div id="particles-js"></div>
+<div class="container" >
+  <div class="col-lg-12" style="background: rgba(0,0,0,0.6);margin-top:3em;margin-bottom:5em;padding-top:1em;padding-bottom:3em;color:#fff;border-radius:10px;-webkit-box-shadow: 2px 2px 15px 0px rgba(0, 3, 0, 0.7);
+-moz-box-shadow:    2px 2px 15px 0px rgba(0, 3, 0, 0.7);
+box-shadow:         2px 2px 15px 0px rgba(0, 3, 0, 0.7);">
+    <div class="col-lg-12">
+      <h1 class="text-center section-title" style="margin-bottom:2em">Определение родственных связей</h1>
+    </div>
+    <style>
+      h4{
+        margin-bottom: 1.5em;
+      }
+      img{
+        border-radius:50%;
+        -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+     transition: all 0.3s ease-in-out;
+      }
+      img:hover{
+        -webkit-box-shadow: 2px 2px 21px 0px rgba(0, 3, 0, 0.91);
+        -moz-box-shadow:    2px 2px 21px 0px rgba(0, 3, 0, 0.91);
+        box-shadow:         2px 2px 21px 0px rgba(0, 3, 0, 0.91);
+        border:2px solid #fff;
+      }
+      h3{
+        margin-bottom: 1.3em;
+      }
+      a{
+        color:inherit
+      }
+      a:hover{
+        color:inherit;
+        text-decoration: none;
+      }
+      .section-title:after {
+        	content:' ';display:block;margin:0 auto;width:100px;margin-top: 6px;border:2px solid #d0d0d0;border-radius:4px;
+        	-webkit-border-radius:4px;
+        	-moz-border-radius:4px;
+        	box-shadow:inset 0 1px 1px rgba(0, 0, 0, .05);
+        	-webkit-box-shadow:inset 0 1px 1px rgba(0, 0, 0, .05);
+        	-moz-box-shadow:inset 0 1px 1px rgba(0, 0, 0, .05);
+          margin-bottom:1em;
+        }
+    </style>
+
+<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+<script>
+   function readURL1(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#prev1')
+                        .attr('src', e.target.result)
+                        .width(150)
+                        .height(200);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+         function readURL2(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#prev2')
+                        .attr('src', e.target.result)
+                        .width(150)
+                        .height(200);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+         function readURL3(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#prev3')
+                        .attr('src', e.target.result)
+                        .width(150)
+                        .height(200);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $(document).ready(function() {
+    $('#b1').bind("click",function() 
+    { 
+        var imgVal = $('#files1').val(); 
+        if(imgVal=='') 
+        { 
+            alert("Выберите фотографию отца!"); 
+            return false; 
+        } 
+      var imgVal2 = $('#files2').val(); 
+        if(imgVal2=='') 
+        { 
+            alert("Выберите фотографию матери!"); 
+            return false; 
+        } 
+      var imgVal3 = $('#files3').val(); 
+        if(imgVal3=='') 
+        { 
+            alert("Выберите фотографию ребенка!"); 
+            return false; 
+        } 
+    }); 
+});
+  </script>
+
+    <div class="row">
+      <p><a name="top"></a></p>
+      <div class="col-md-5">
+        <h3 class="text-center">Выберите фотографии родителей и ребенка</h3>
+        
+          <form id="target" action="detect_image" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+          <div class="col-md-6">
+            <label for="files1" style="cursor:pointer">
+            <img src="{% static 'img/dad.png' %}" class="img-responsive" />
+            </label>   
+            <input type="file" name="userImage1" id="files1" accept="image/*" style="display: none;" onchange="readURL1(this);"  required >
+            
+
+            <h4 class="text-center">Отец</h4>
+          </div>
+
+            <div class="col-md-6">
+            <label for="files2" style="cursor:pointer">
+            <img src="{% static 'img/mom.png' %}" class="img-responsive" />
+            </label>   
+            <input type="file" name="userImage2" id="files2" accept="image/*" style="display: none;" onchange="readURL2(this);" required>
+            <h4 class="text-center">Мать</h4>
+          </div>
+
+            <div class="col-md-6">
+            <label for="files3" style="cursor:pointer">
+            <img src="{% static 'img/ch.png' %}" class="img-responsive" />
+            </label>   
+            <input type="file" name="userImage3" id="files3" accept="image/*" style="display: none;" onchange="readURL3(this);" required>
+            <h4 class="text-center">Ребенок</h4>
+          </div>
+
+          <div class="col-md-6">
+            <label for="b1" style="cursor:pointer">
+            <img src="{% static 'img/arrowdown.png' %}" class="img-responsive" />
+            </label>
+            <button type="submit" id="b1" style="display: none;">Upload</button>
+            <h4 class="text-center">Получить результаты</h4>
+            <h4 class="text-center">Листайте вниз</h4>
+          </div>
+          </form>
+      </div>
+    
+ <div class="col-md-7">
+        <h3 class="text-center">Выбранные фотографии</h3>
+        <div class="col-md-4">
+          <img id="prev1" src="{% static 'img/1.png' %}" class="img-responsive"/>
+          <h4 class="text-center">Отец</h4>
+        </div>
+        <div class="col-md-4">
+          <img id="prev2" src="{% static 'img/2.png' %}" class="img-responsive"/>
+          <h4 class="text-center">Мать</h4>
+        </div>
+        <div class="col-md-4">
+          <img id="prev3" src="{% static 'img/3.png' %}" class="img-responsive"/>
+          <h4 class="text-center">Ребенок</h4>
+        </div>
+        <div class="col-md-4">
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-lg-12">
+      <h1 class="text-center section-title" style="margin-bottom:2em">Результаты проведения анализа</h1>
+    </div>
+
+  <div class="row">
+
+      <div class="col-md-7">
+        <h3 class="text-center">Фотография ребенка</h3>
+        <div class="col-md-4">
+          {% with result1.5 as r1 %}
+              <img src="{% static 'result/'|add:r1' %}" onerror="this.style.display='none'" />
+          {% endwith %}
+          </div>
+      </div>
+
+      <div class="col-md-4">
+        <h3 class="text-center">Результаты</h3>
+        <font color=#0853cc><h3>Анализ схожести по общим признакам</h3></font>
+        {% with result1.0 as r2 %}
+          <h4>{{ r2 }}</h4>
+        {% endwith %}
+          <font color=#0853cc><h3>Анализ схожести по отдельным признакам</h3></font>
+          <h4>
+          <ul>
+            {% with result1.1 as r3 %}
+          <li>{{ r3 }}</li>
+          {% endwith %}
+          {% with result1.2 as r4 %}
+          <br><li>{{ r4 }}</li>
+          {% endwith %}
+          {% with result1.3 as r5 %}
+          <br><li>{{ r5 }}</li>
+          {% endwith %}
+          {% with result1.4 as r6 %}
+          <br><li>{{ r6}}</li>
+          {% endwith %}
+          </ul>
+        </h4>
+        <font color=#0853cc><h3>Почему результаты общего анализа и анализа отдельных частей лица могут быть разными?</h3></font>
+        <h4><p>При общем анализе лиц система использует большое количество параметров для сравнения, не только форму носа, глаз, рта и подбородка.</p>
+        <p>Результаты анализа частей лица показывают только то, на кого из родителей эти части похожи больше</p>
+        </h4>
+      </div>
+  </div>
+<p><a href="#top">Наверх</a></p>
+</div>
+</div>
+
+{% endblock %}
