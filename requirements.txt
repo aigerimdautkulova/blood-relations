@@ -1,0 +1,9 @@
+python
+numpy
+scipy
+dlib
+opencv
+skimage
+imutils
+PIL
+sklearn
