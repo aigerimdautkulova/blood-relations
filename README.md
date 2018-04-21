@@ -2,10 +2,7 @@
 
 General Languages and versions
 
-    •	Python version: 3.6    •	Django version: 1.11.9
-    •	OpenCV version: 3.4.0
-    •	Sklearn version: 0.19.1
-    •	Mysql Database
+    •	Python version: 3.6    •	Django  •	OpenCV  •	Sklearn     •	Mysql Database •	Dlib • 
 
 Run -
 

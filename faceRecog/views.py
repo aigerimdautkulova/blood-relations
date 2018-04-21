@@ -315,8 +315,11 @@ def detectImage(request):
 		if (avg_1<avg_2): cv2.putText(face_image3,'Dad',bottomLeftCornerOfText,font,fontScale,fontColor,lineType)
 		else: cv2.putText(face_image3,'Mom',bottomLeftCornerOfText,font,fontScale,fontColor,lineType)
 
-		imgpathresult = BASE_DIR+'/static/result/'+str(userImage3)
-		name1 = str(userImage3)
+		st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H_%M_%S')
+
+
+		imgpathresult = BASE_DIR+'/static/result/'+str(st)+'.jpg'
+		name1 = str(st)+'.jpg'
 		res.append(name1)
 		cv2.imwrite(imgpathresult, cv2.cvtColor(face_image3, cv2.COLOR_RGB2BGR))
 
