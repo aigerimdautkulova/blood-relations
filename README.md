@@ -1,9 +1,13 @@
-﻿# bloodrelationsDefining blood relations.
+﻿# bloodrelations: Defining blood relations.
 
 General Languages and versions
 
-    •	Python version: 3.6    •	Django  •	OpenCV  •	Sklearn     •	Mysql Database •	Dlib • 
+    •	Python version: 3.6    
+    •	Django  
+    •	OpenCV  
+    •	Sklearn     
+    •	Mysql Database 
+    •	Dlib
 
-Run -
-
+Run 
     python manage.py runserver
